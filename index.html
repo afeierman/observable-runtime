@@ -3,15 +3,49 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css">
 <body>
 <script type="module">
+  import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+  import define from "https://api.observablehq.com/@trase/two-part-sankey.js?v=3";
 
-import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
-import define from "https://api.observablehq.com/@tmcw/hello-world.js?v=3";
+  const runtime = new Runtime();
+  const main = runtime.module(define, name => {
+      return new Inspector(document.body);
+  });
 
-const runtime = new Runtime();
-const main = runtime.module(define, name => {
-  if (name === "hello") {
-    return new Inspector(document.body);
-  }
-});
+  let newData = [
+    {
+      "from": "Test Area 1",
+      "to": "Andrewland",
+      "value": 655565.829
+    },
+    {
+      "from": "Test Area 2",
+      "to": "Arieland",
+      "value": 426504
+    },
+    {
+      "from": "Test Area 1",
+      "to": "Andrewland",
+      "value": 260412
+    },
+    {
+      "from": "Test Area 2",
+      "to": "Arieland",
+      "value": 161545
+    },
+    {
+      "from": "Neural Alpha",
+      "to": "Stockholm Environment Institute",
+      "value": 119904
+    },
+    {
+      "from": "Test Area 1",
+      "to": "Stockholm Environment Institute",
+      "value": 388945
+    }
+  ]
 
+
+
+  main.redefine("data", newData)
+  
 </script>
