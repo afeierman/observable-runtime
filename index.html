@@ -8,7 +8,9 @@
 
   const runtime = new Runtime();
   const main = runtime.module(define, name => {
+    if (name === "chart") {
       return new Inspector(document.body);
+    }
   });
 
   let newData = [
